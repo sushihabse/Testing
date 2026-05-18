@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
 
+const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
+
+useEffect(() => {
+  fetch("/Testing/news/articles.json")
+    .then((res) => res.json())
+    .then((data) => setNewsItems(data))
+    .catch(() => setNewsItems([]));
+}, []);
 // ── Replace these with your actual image imports ──
 // import heroImage from "../assets/hero.jpg";
 // import aboutImage from "../assets/about.png";
@@ -12,6 +20,9 @@ import "./Home.css";
 // import contactImage from "../assets/contact.png";
 
 type Lang = "ja" | "en";
+
+
+import { useEffect, useState } from "react";
 
 type NewsItem = {
   id: string;
@@ -82,6 +93,10 @@ const content = {
     contactText:
       "各種ご相談については、お気軽にお問い合わせください。\nオンラインでのご相談にも対応しております。",
     contactBtn: "お問い合わせはこちら",
+    // inside ja:
+
+    newsLoading: "記事を読み込み中...",
+  
   },
 
   en: {
@@ -89,6 +104,7 @@ const content = {
     heroTitle: "Bridging Global Talent & Capital",
     heroSub: "A support platform for international talent and investment.",
     heroBtn: "Learn More",
+    
 
     // About
     aboutEyebrow: "ABOUT JIEF",
@@ -136,12 +152,15 @@ const content = {
     newsTitle: "News",
     newsMore: "View All →",
     newsLoading: "Loading articles...",
+    // inside en:
+    newsLoading: "Loading articles...",
 
     // Contact
     contactTitle: "Contact",
     contactText:
       "Please feel free to contact us for any inquiries.\nOnline consultations are also available.",
     contactBtn: "Contact Us",
+    
   },
 };
 
@@ -332,32 +351,35 @@ function Home({ language }: Props) {
       {/* ══════════════════════════════
           NEWS
       ══════════════════════════════ */}
-      <section className="news-section" id="section-3">
-        <div className="news-header">
-          <h2>{t.newsTitle}</h2>
-          <a href="#" className="news-more">{t.newsMore}</a>
-        </div>
+      {/* ══════════════════════════════
+    NEWS
+══════════════════════════════ */}
+<section className="news-section">
+  <div className="news-header">
+    <h2>{t.newsTitle}</h2>
+    <a href="#" className="news-more">{t.newsMore}</a>
+  </div>
 
-        <div className="news-list">
-          {newsItems.length === 0 ? (
-            <p className="news-loading">{t.newsLoading}</p>
-          ) : (
-            newsItems.map((item) => (
-              <div key={item.id} className="news-item">
-                <div className="news-item-left">
-                  <span className={`news-tag ${item.tagColor}`}>
-                    {language === "ja" ? item.tag : item.tagEn}
-                  </span>
-                  <span className="news-item-text">
-                    {language === "ja" ? item.titleJa : item.titleEn}
-                  </span>
-                </div>
-                <span className="news-item-date">{item.date}</span>
-              </div>
-            ))
-          )}
+  <div className="news-list">
+    {newsItems.length === 0 ? (
+      <p className="news-loading">{t.newsLoading}</p>
+    ) : (
+      newsItems.map((item) => (
+        <div key={item.id} className="news-item">
+          <div className="news-item-left">
+            <span className={`news-tag ${item.tagColor}`}>
+              {language === "ja" ? item.tag : item.tagEn}
+            </span>
+            <span className="news-item-text">
+              {language === "ja" ? item.titleJa : item.titleEn}
+            </span>
+          </div>
+          <span className="news-item-date">{item.date}</span>
         </div>
-      </section>
+      ))
+    )}
+  </div>
+</section>
 
       {/* ══════════════════════════════
           CONTACT
