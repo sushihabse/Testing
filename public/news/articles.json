@@ -1,0 +1,38 @@
+[
+  {
+    "id": "2026-05-08-visa-update",
+    "tag": "制度情報",
+    "tagEn": "Policy Info",
+    "tagColor": "tag-gray",
+    "titleJa": "経営・管理ビザ制度をめぐる最近の動向について",
+    "titleEn": "Latest Developments in Business Management Visa",
+    "date": "2026.05.08",
+    "bodyJa": "経営・管理ビザに関する最新情報です。",
+    "bodyEn": "Latest information regarding the business management visa.",
+    "image": null
+  },
+  {
+    "id": "2026-04-18-overseas-market",
+    "tag": "海外市場",
+    "tagEn": "Overseas Market",
+    "tagColor": "tag-amber",
+    "titleJa": "アジア主要地域における海外展開環境について",
+    "titleEn": "Overseas Expansion Environment in Major Asian Regions",
+    "date": "2026.04.18",
+    "bodyJa": "アジア地域の最新動向についての考察です。",
+    "bodyEn": "Analysis of the latest trends in the Asian region.",
+    "image": null
+  },
+  {
+    "id": "2026-03-28-consultation",
+    "tag": "活動情報",
+    "tagEn": "Activity Info",
+    "tagColor": "tag-blue",
+    "titleJa": "国際ビジネスに関する情報提供および相談対応について",
+    "titleEn": "International Business Information and Consultation",
+    "date": "2026.03.28",
+    "bodyJa": "国際ビジネスに関する相談対応を実施しています。",
+    "bodyEn": "We provide consultations on international business.",
+    "image": null
+  }
+]
