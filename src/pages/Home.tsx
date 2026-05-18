@@ -1,14 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
 
-const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
-
-useEffect(() => {
-  fetch("/Testing/news/articles.json")
-    .then((res) => res.json())
-    .then((data) => setNewsItems(data))
-    .catch(() => setNewsItems([]));
-}, []);
 // ── Replace these with your actual image imports ──
 // import heroImage from "../assets/hero.jpg";
 // import aboutImage from "../assets/about.png";
@@ -19,10 +11,11 @@ useEffect(() => {
 // import proj3Image from "../assets/proj3.png";
 // import contactImage from "../assets/contact.png";
 
+// ─────────────────────────────────────────────────
+// Types
+// ─────────────────────────────────────────────────
+
 type Lang = "ja" | "en";
-
-
-import { useEffect, useState } from "react";
 
 type NewsItem = {
   id: string;
@@ -36,6 +29,10 @@ type NewsItem = {
   bodyEn: string;
   image: string | null;
 };
+
+// ─────────────────────────────────────────────────
+// Content (i18n)
+// ─────────────────────────────────────────────────
 
 const content = {
   ja: {
@@ -93,10 +90,6 @@ const content = {
     contactText:
       "各種ご相談については、お気軽にお問い合わせください。\nオンラインでのご相談にも対応しております。",
     contactBtn: "お問い合わせはこちら",
-    // inside ja:
-
-    newsLoading: "記事を読み込み中...",
-  
   },
 
   en: {
@@ -104,7 +97,6 @@ const content = {
     heroTitle: "Bridging Global Talent & Capital",
     heroSub: "A support platform for international talent and investment.",
     heroBtn: "Learn More",
-    
 
     // About
     aboutEyebrow: "ABOUT JIEF",
@@ -124,8 +116,7 @@ const content = {
       "We support smooth activities in Japan through visa, company setup, and lifestyle guidance.",
     support1Tags: ["General Support", "Startup Support", "Talent Support"],
     support2Title: "Support for Japanese",
-    support2Text1:
-      "We support overseas business expansion and asset formation.",
+    support2Text1: "We support overseas business expansion and asset formation.",
     support2Text2:
       "We support international business and asset formation through overseas real estate information and local partnerships.",
     support2Tags: ["Global Asset Support", "Overseas Startup Introduction"],
@@ -152,17 +143,18 @@ const content = {
     newsTitle: "News",
     newsMore: "View All →",
     newsLoading: "Loading articles...",
-    // inside en:
-    newsLoading: "Loading articles...",
 
     // Contact
     contactTitle: "Contact",
     contactText:
       "Please feel free to contact us for any inquiries.\nOnline consultations are also available.",
     contactBtn: "Contact Us",
-    
   },
 };
+
+// ─────────────────────────────────────────────────
+// Component
+// ─────────────────────────────────────────────────
 
 type Props = { language: Lang };
 
@@ -172,8 +164,8 @@ function Home({ language }: Props) {
 
   useEffect(() => {
     fetch("/Testing/news/articles.json")
-      .then((r) => r.json())
-      .then((data) => setNewsItems(data))
+      .then((res) => res.json())
+      .then((data: NewsItem[]) => setNewsItems(data))
       .catch(() => setNewsItems([]));
   }, []);
 
@@ -234,7 +226,9 @@ function Home({ language }: Props) {
               <p>{t.support1Text2}</p>
               <div className="support-tags">
                 {t.support1Tags.map((tag, i) => (
-                  <span key={i} className="support-tag">{tag}</span>
+                  <span key={i} className="support-tag">
+                    {tag}
+                  </span>
                 ))}
               </div>
             </div>
@@ -256,7 +250,9 @@ function Home({ language }: Props) {
               <p>{t.support2Text2}</p>
               <div className="support-tags">
                 {t.support2Tags.map((tag, i) => (
-                  <span key={i} className="support-tag">{tag}</span>
+                  <span key={i} className="support-tag">
+                    {tag}
+                  </span>
                 ))}
               </div>
             </div>
@@ -274,7 +270,6 @@ function Home({ language }: Props) {
         </div>
 
         <div className="project-grid">
-
           {/* Card 1 */}
           <div className="project-card">
             <div className="project-card-img">
@@ -284,7 +279,8 @@ function Home({ language }: Props) {
             <div className="project-card-divider" />
             <div className="project-card-body">
               <h3>
-                {t.proj1Title}<br />
+                {t.proj1Title}
+                <br />
                 <span className="project-card-badge">（{t.proj1Badge}）</span>
               </h3>
               <p>{t.proj1Text}</p>
@@ -300,7 +296,8 @@ function Home({ language }: Props) {
             <div className="project-card-divider" />
             <div className="project-card-body">
               <h3>
-                {t.proj2Title}<br />
+                {t.proj2Title}
+                <br />
                 <span className="project-card-badge">（{t.proj2Badge}）</span>
               </h3>
               <p>{t.proj2Text}</p>
@@ -310,7 +307,7 @@ function Home({ language }: Props) {
           {/* Card 3 — animated hover cycles image + title */}
           <div className="project-card project-card-animated">
             <div className="project-card-img multi-hover-img">
-              {/* Replace src values with your actual images */}
+              {/* Replace className values with actual <img> tags */}
               <div className="slide-img img-1 img-placeholder" />
               <div className="slide-img img-2 img-placeholder" />
               <div className="slide-img img-3 img-placeholder" />
@@ -319,28 +316,30 @@ function Home({ language }: Props) {
             <div className="project-card-body">
               <div className="card3-title card3-title--1">
                 <h3>
-                  {t.proj3Title}<br />
+                  {t.proj3Title}
+                  <br />
                   <span className="project-card-badge">（{t.proj3Badge}）</span>
                 </h3>
                 <p>{t.proj3Text}</p>
               </div>
               <div className="card3-title card3-title--2">
                 <h3>
-                  {t.proj2Title}<br />
+                  {t.proj2Title}
+                  <br />
                   <span className="project-card-badge">（{t.proj2Badge}）</span>
                 </h3>
                 <p>{t.proj2Text}</p>
               </div>
               <div className="card3-title card3-title--3">
                 <h3>
-                  {t.proj1Title}<br />
+                  {t.proj1Title}
+                  <br />
                   <span className="project-card-badge">（{t.proj1Badge}）</span>
                 </h3>
                 <p>{t.proj1Text}</p>
               </div>
             </div>
           </div>
-
         </div>
 
         <div className="project-btn-wrap">
@@ -351,35 +350,34 @@ function Home({ language }: Props) {
       {/* ══════════════════════════════
           NEWS
       ══════════════════════════════ */}
-      {/* ══════════════════════════════
-    NEWS
-══════════════════════════════ */}
-<section className="news-section">
-  <div className="news-header">
-    <h2>{t.newsTitle}</h2>
-    <a href="#" className="news-more">{t.newsMore}</a>
-  </div>
-
-  <div className="news-list">
-    {newsItems.length === 0 ? (
-      <p className="news-loading">{t.newsLoading}</p>
-    ) : (
-      newsItems.map((item) => (
-        <div key={item.id} className="news-item">
-          <div className="news-item-left">
-            <span className={`news-tag ${item.tagColor}`}>
-              {language === "ja" ? item.tag : item.tagEn}
-            </span>
-            <span className="news-item-text">
-              {language === "ja" ? item.titleJa : item.titleEn}
-            </span>
-          </div>
-          <span className="news-item-date">{item.date}</span>
+      <section className="news-section" id="section-3">
+        <div className="news-header">
+          <h2>{t.newsTitle}</h2>
+          <a href="#" className="news-more">
+            {t.newsMore}
+          </a>
         </div>
-      ))
-    )}
-  </div>
-</section>
+
+        <div className="news-list">
+          {newsItems.length === 0 ? (
+            <p className="news-loading">{t.newsLoading}</p>
+          ) : (
+            newsItems.map((item) => (
+              <div key={item.id} className="news-item">
+                <div className="news-item-left">
+                  <span className={`news-tag ${item.tagColor}`}>
+                    {language === "ja" ? item.tag : item.tagEn}
+                  </span>
+                  <span className="news-item-text">
+                    {language === "ja" ? item.titleJa : item.titleEn}
+                  </span>
+                </div>
+                <span className="news-item-date">{item.date}</span>
+              </div>
+            ))
+          )}
+        </div>
+      </section>
 
       {/* ══════════════════════════════
           CONTACT
